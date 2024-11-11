@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dogs
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: dogs
+  template:
+    metadata:
+      labels:
+        app: dogs
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: dog-container
+        image: 866477832211.dkr.ecr.ap-northeast-2.amazonaws.com/abc-dogs:20241107.072310
+        resources:
+          requests:
+            cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dogs-svc
+  labels:
+    app: dogs
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: dogs

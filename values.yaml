@@ -4,3 +4,31 @@
 
 replicaCount: 3
 
+ingress:
+  labels:
+    app.kubernetes.io/instance: cad
+    app.kubernetes.io/name: cad
+  annotations:
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:866477832211:certificate/91db58e2-f929-44d2-b194-f6fa6be7f9cb
+    alb.ingress.kubernetes.io/load-balancer-name: cad
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    external-dns.alpha.kubernetes.io/hostname: cad.gguduck.com
+  className: alb
+  paths:
+    - path: "/"
+      pathType: "Prefix"
+      serviceName: webs-svc
+      servicePort: 80
+    - path: "/cats/"
+      pathType: "Prefix"
+      serviceName: cats-svc
+      servicePort: 80
+    - path: "/dogs/"
+      pathType: "Prefix"
+      serviceName: dogs-svc
+      servicePort: 80
+
+  
+  
+
