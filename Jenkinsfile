@@ -36,7 +36,7 @@ pipeline {
                         sh '''#!/bin/bash
                             helm registry login --username AWS --password-stdin 866477832211.dkr.ecr.${AWS_REGION}.amazonaws.com <<< "${token}"
                             helm package .
-                            ll
+                            ls
                         '''
                     }
                 }
