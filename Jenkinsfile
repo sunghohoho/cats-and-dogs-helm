@@ -19,7 +19,8 @@ pipeline {
                 container("aws"){
                     script {
                         sh """
-                            aws ecr get-login-password --region ${AWS_REGION} | helm registry login --username AWS --password-stdin 866477832211.dkr.ecr.ap-northeast-2.amazonaws.com
+                            token = ${aws ecr get-login-password --region ${AWS_REGION}}
+                            echo token
                         """
                     }
                 }
