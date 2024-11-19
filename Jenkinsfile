@@ -19,12 +19,12 @@ pipeline {
             steps {
                 container("aws"){
                     script {
-                        sh '''#!/bin/bash
-                            aws sts get-caller-identity
-                            ecr_token=$(aws ecr get-login-password --region $AWS_REGION)
-                            echo "Token: $ecr_token"
-                            echo "export ECR_TOKEN=$ecr_token" >> $BASH_ENV
-                        '''
+                        // AWS 명령어로 ECR 로그인 토큰을 가져오고 env.token에 저장
+                        def ecr_token = sh(script: 'aws ecr get-login-password --region $AWS_REGION', returnStdout: true)
+                        env.token = ecr_token
+                        
+                        // 디버깅: ECR 토큰 출력
+                        echo "ECR Token: ${env.token}"
                     }
                 }
             }
