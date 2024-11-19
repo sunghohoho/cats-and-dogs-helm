@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stage("login") {
+        stage("ecr get token") {
             steps {
                 container("aws"){
                     script {
@@ -23,6 +23,17 @@ pipeline {
                             aws sts get-caller-identity
                             env.ecr_token=$(aws ecr get-login-password --region $AWS_REGION)
                             echo "Token: $ecr_token"
+                        '''
+                    }
+                }
+            }
+        }
+        stage("helm package & push to ecr") {
+            steps {
+                container("helm"){
+                    script {
+                        sh '''#!/bin/bash
+                            helm registry login --username AWS --password-stdin 866477832211.dkr.ecr.${AWS_REGION}.amazonaws.com <<< "$ecr_token"
                         '''
                     }
                 }
