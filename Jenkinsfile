@@ -14,6 +14,7 @@ pipeline {
                 checkout scm
             }
         }
+        
         stage("login") {
             steps {
                 container("aws"){
