@@ -21,8 +21,8 @@ pipeline {
                     script {
                         sh '''#!/bin/bash
                             aws sts get-caller-identity
-                            token=$(aws ecr get-login-password --region $AWS_REGION)
-                            echo "Token: $token"
+                            env.ecr_token=$(aws ecr get-login-password --region $AWS_REGION)
+                            echo "Token: $ecr_token"
                         '''
                     }
                 }
