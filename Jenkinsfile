@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage("helm package & push to ecr") {
+        stage("helm package & push to aws ecr") {
             steps {
                 container("helm"){
                     script {
