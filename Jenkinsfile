@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stage("ecr get token") {
+        stage("aws ecr get token") {
             steps {
                 container("aws"){
                     script {
