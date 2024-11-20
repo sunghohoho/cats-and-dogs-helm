@@ -42,7 +42,7 @@ pipeline {
                             
                             helm registry login --username AWS --password-stdin 866477832211.dkr.ecr.${AWS_REGION}.amazonaws.com <<< "${token}"
                             helm package .
-                            ls
+                            helm push $CHART_NAME-$CHART_VERSION.tgz oci://$AWS_HELM_REPO
                         '''
                     }
                 }
