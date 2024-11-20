@@ -34,6 +34,12 @@ pipeline {
                 container("helm"){
                     script {
                         sh '''#!/bin/bash
+                            CHART_NAME=$(awk '/^name:/ { print $2 }' Chart.yaml)
+                            CHART_VERSION=$(awk '/^version:/ { print $2 }' Chart.yaml)
+    
+                            echo "Chart Name: $CHART_NAME"
+                            echo "Chart Version: $CHART_VERSION"
+                            
                             helm registry login --username AWS --password-stdin 866477832211.dkr.ecr.${AWS_REGION}.amazonaws.com <<< "${token}"
                             helm package .
                             ls
