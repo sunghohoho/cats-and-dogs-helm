@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: dog-container
-        image: 866477832211.dkr.ecr.ap-northeast-2.amazonaws.com/abc-dogs:20241107.072310
+        image: "{{ .Values.image.webs-repository }}:{{ .Values.image.tag }}"
         resources:
           requests:
             cpu: 250m
