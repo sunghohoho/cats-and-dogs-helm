@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: cat-container
-        image: {{ .Values.image.catrepository }}:{{ .Values.image.tag }}
+        image: {{ .Values.image.catsrepository }}:{{ .Values.image.tag }}
         resources:
           requests:
             cpu: 250m
